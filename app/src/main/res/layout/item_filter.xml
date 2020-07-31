@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/text_filter_name"
+    android:layout_width="@dimen/round_button_medium"
+    android:layout_height="@dimen/round_button_medium"
+    android:layout_margin="12dp"
+    android:background="@android:color/white"
+    android:text="@string/app_name"
+    android:textSize="18sp" />

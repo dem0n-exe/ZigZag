@@ -21,6 +21,7 @@ class MainActivity : AppCompatActivity() {
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
                 R.id.navigation_home -> fullScreen()
+                R.id.navigation_camera -> fullScreen()
                 else -> clearFullScreen()
             }
         }

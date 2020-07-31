@@ -1,12 +1,9 @@
 package com.example.zigzag.ui.camera
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.daasuu.gpuv.egl.filter.GlFilter
 
 class CameraViewModel : ViewModel() {
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is camera Fragment"
-    }
-    val text: LiveData<String> = _text
+    var seekBarProgress = 50
+    var filter: GlFilter = GlFilter()
 }

@@ -6,17 +6,93 @@
     android:layout_height="match_parent"
     tools:context=".ui.camera.CameraFragment">
 
-    <TextView
-        android:id="@+id/text_camera"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
+    <FrameLayout
+        android:id="@+id/frame_layout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ToggleButton
+        android:id="@+id/switch_camera"
+        android:layout_width="@dimen/round_button_small"
+        android:layout_height="@dimen/round_button_small"
+        android:layout_marginEnd="12dp"
+        android:background="@drawable/ic_flip_camera_android_black_24dp"
+        android:backgroundTint="@android:color/white"
+        android:textOff=""
+        android:textOn=""
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ToggleButton
+        android:id="@+id/switch_flash"
+        android:layout_width="@dimen/round_button_small"
+        android:layout_height="@dimen/round_button_small"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="12dp"
+        android:background="@drawable/flash_icon"
+        android:backgroundTint="@android:color/white"
+        android:textOff=""
+        android:textOn=""
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/switch_camera" />
+
+    <SeekBar
+        android:id="@+id/seek_bar_filter"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="12dp"
+        android:progressTint="@android:color/white"
+        android:thumbTint="@android:color/white"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@id/list_filter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/list_filter"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/round_button_large"
+        android:layout_marginStart="18dp"
+        android:layout_marginEnd="18dp"
+        android:layout_marginBottom="12dp"
+        android:orientation="horizontal"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@id/switch_shutter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ToggleButton
+        android:id="@+id/switch_shutter"
+        android:layout_width="@dimen/round_button_large"
+        android:layout_height="@dimen/round_button_large"
+        android:layout_marginBottom="18dp"
+        android:background="@drawable/shutter_icon"
+        android:backgroundTint="@color/red"
+        android:textOff=""
+        android:textOn=""
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ToggleButton
+        android:id="@+id/switch_filters"
+        android:layout_width="@dimen/round_button_small"
+        android:layout_height="@dimen/round_button_small"
+        android:layout_margin="18dp"
+        android:background="@drawable/style_black_24dp"
+        android:backgroundTint="@android:color/white"
+        android:textOff=""
+        android:textOn=""
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

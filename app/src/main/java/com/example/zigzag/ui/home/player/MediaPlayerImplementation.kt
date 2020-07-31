@@ -25,10 +25,7 @@ import java.io.File
 
 
 class MediaPlayerImplementation private constructor(private val context: Context) : CacheListener {
-    private val proxy: HttpProxyCacheServer =
-        HttpProxyCacheServer.Builder(context.applicationContext)
-            .cacheDirectory(CacheUtils.getVideoCacheDir(context.applicationContext))
-            .build()
+    private lateinit var proxy: HttpProxyCacheServer
 
     val player: SimpleExoPlayer
 
@@ -102,12 +99,15 @@ class MediaPlayerImplementation private constructor(private val context: Context
 
     fun releasePlayer() {
         player.release()
-        proxy.unregisterCacheListener(this)
+        if (this::proxy.isInitialized) proxy.unregisterCacheListener(this)
     }
 
     override fun onCacheAvailable(cacheFile: File?, url: String?, percentsAvailable: Int) {}
 
     private fun setProxy(url: String) {
+        proxy = HttpProxyCacheServer.Builder(context.applicationContext)
+            .cacheDirectory(CacheUtils.getVideoCacheDir(context.applicationContext))
+            .build()
         proxy.registerCacheListener(this, url)
     }
 

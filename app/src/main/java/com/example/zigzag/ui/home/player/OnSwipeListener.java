@@ -3,10 +3,6 @@ package com.example.zigzag.ui.home.player;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 
-/**
- * Credits : https://stackoverflow.com/a/26387629
- */
-
 public class OnSwipeListener extends GestureDetector.SimpleOnGestureListener {
 
     @Override

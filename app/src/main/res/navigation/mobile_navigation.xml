@@ -18,10 +18,24 @@
         tools:layout="@layout/fragment_explore" />
 
     <fragment
+        android:id="@+id/navigation_permission"
+        android:name="com.example.zigzag.ui.camera.PermissionFragment"
+        android:label="@string/title_camera">
+
+        <action
+            android:id="@+id/action_permission_to_camera"
+            app:destination="@id/navigation_camera"
+            app:popUpTo="@id/navigation_permission"
+            app:popUpToInclusive="true" />
+
+    </fragment>
+
+    <fragment
         android:id="@+id/navigation_camera"
         android:name="com.example.zigzag.ui.camera.CameraFragment"
         android:label="@string/title_camera"
         tools:layout="@layout/fragment_camera" />
+
 
     <fragment
         android:id="@+id/navigation_notifications"
