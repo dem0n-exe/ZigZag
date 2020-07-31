@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">ZigZag</string>
+    <string name="title_home">Home</string>
+    <string name="title_explore">Explore</string>
+    <string name="title_camera">Camera</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="title_profile">Profile</string>
+    <string name="retry_text">Error occurred! Check your internet connection. Tap to retry</string>
+</resources>

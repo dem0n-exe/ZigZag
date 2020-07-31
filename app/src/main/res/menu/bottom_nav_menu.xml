@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_home"
+        android:icon="@drawable/home_icon"
+        android:title="@string/title_home" />
+
+    <item
+        android:id="@+id/navigation_explore"
+        android:icon="@drawable/explore_icon"
+        android:title="@string/title_explore" />
+
+    <item
+        android:id="@+id/navigation_camera"
+        android:icon="@drawable/camera_icon"
+        android:title="@string/title_camera" />
+
+    <item
+        android:id="@+id/navigation_notifications"
+        android:icon="@drawable/notifications_icon"
+        android:title="@string/title_notifications" />
+
+    <item
+        android:id="@+id/navigation_profile"
+        android:icon="@drawable/account_icon"
+        android:title="@string/title_profile" />
+
+</menu>
