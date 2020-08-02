@@ -1,14 +1,12 @@
 package com.example.zigzag.ui.camera
 
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
-import android.widget.FrameLayout
-import android.widget.SeekBar
-import android.widget.Toast
-import android.widget.ToggleButton
+import android.widget.*
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
@@ -41,9 +39,11 @@ class CameraFragment : Fragment() {
     private lateinit var switchFilterButton: ToggleButton
     private lateinit var recyclerView: RecyclerView
     private lateinit var filterSeekBar: SeekBar
+    private lateinit var recordProgress: ProgressBar
 
     private lateinit var glSurfaceView: SampleCameraGLView
     private lateinit var gpuCameraRecorder: GPUCameraRecorder
+    private lateinit var countDownTimer: CountDownTimer
 
     private var switchCamera = false
     private lateinit var _activity: FragmentActivity
@@ -64,6 +64,7 @@ class CameraFragment : Fragment() {
         switchFilterButton = root.findViewById(R.id.switch_filters)
         recyclerView = root.findViewById(R.id.list_filter)
         filterSeekBar = root.findViewById(R.id.seek_bar_filter)
+        recordProgress = root.findViewById(R.id.progress)
 
 
         return root
@@ -108,13 +109,20 @@ class CameraFragment : Fragment() {
             }
         }
 
+        setTimer()
         shutterButton.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
                 filePath = FileUtils.getOutputDirectory(requireContext())
                 gpuCameraRecorder.start(filePath)
+                recordProgress.visibility = View.VISIBLE
+                countDownTimer.start()
             } else {
-                if (gpuCameraRecorder.isStarted)
+                if (gpuCameraRecorder.isStarted) {
                     gpuCameraRecorder.stop()
+                    recordProgress.visibility = View.GONE
+                    countDownTimer.cancel()
+                    recordProgress.progress = 15
+                }
             }
         }
 
@@ -137,6 +145,23 @@ class CameraFragment : Fragment() {
             override fun onStartTrackingTouch(seekBar: SeekBar?) {}
             override fun onStopTrackingTouch(seekBar: SeekBar?) {}
         })
+    }
+
+    private fun setTimer() {
+        val time = 15000L
+        recordProgress.max = 15
+        countDownTimer = object : CountDownTimer(time, 1000L) {
+            override fun onTick(millisUntilFinished: Long) {
+                recordProgress.progress = (millisUntilFinished / 1000).toInt()
+            }
+
+            override fun onFinish() {
+                if (gpuCameraRecorder.isStarted) {
+                    gpuCameraRecorder.stop()
+                    shutterButton.isChecked = false
+                }
+            }
+        }
     }
 
     private fun saveState() {
@@ -225,6 +250,11 @@ class CameraFragment : Fragment() {
     }
 
     private fun stopCamera() {
+        if (gpuCameraRecorder.isStarted) {
+            recordProgress.visibility = View.GONE
+            countDownTimer.cancel()
+            recordProgress.progress = 15
+        }
         glSurfaceView.onPause()
         gpuCameraRecorder.stop()
         gpuCameraRecorder.release()
