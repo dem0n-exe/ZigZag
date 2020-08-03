@@ -35,7 +35,7 @@ class PermissionFragment : Fragment() {
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == PERMISSIONS_REQUEST_CODE) {
-            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            if (grantResults.all { it == PackageManager.PERMISSION_GRANTED }) {
                 // Takes the user to the success fragment when permission is granted
                 Navigation.findNavController(requireActivity(), R.id.nav_host_fragment)
                     .navigate(R.id.navigation_camera)
