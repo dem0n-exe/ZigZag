@@ -11,6 +11,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.viewModels
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.daasuu.gpuv.camerarecorder.CameraRecordListener
@@ -77,9 +78,14 @@ class CameraFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        startCamera()
-        setViews()
-        restoreState()
+        if (!PermissionFragment.hasPermissions(requireContext())) {
+            Navigation.findNavController(requireActivity(), R.id.nav_host_fragment)
+                .navigate(R.id.action_camera_to_permission)
+        } else {
+            startCamera()
+            setViews()
+            restoreState()
+        }
     }
 
     override fun onPause() {
@@ -250,14 +256,17 @@ class CameraFragment : Fragment() {
     }
 
     private fun stopCamera() {
-        if (gpuCameraRecorder.isStarted) {
+        if (this::gpuCameraRecorder.isInitialized && this::glSurfaceView.isInitialized
+            && gpuCameraRecorder.isStarted
+        ) {
             recordProgress.visibility = View.GONE
             countDownTimer.cancel()
             recordProgress.progress = 15
+
+            glSurfaceView.onPause()
+            gpuCameraRecorder.stop()
+            gpuCameraRecorder.release()
+            frameLayout.removeView(glSurfaceView)
         }
-        glSurfaceView.onPause()
-        gpuCameraRecorder.stop()
-        gpuCameraRecorder.release()
-        frameLayout.removeView(glSurfaceView)
     }
 }

@@ -20,13 +20,12 @@
     <fragment
         android:id="@+id/navigation_permission"
         android:name="com.example.zigzag.ui.camera.PermissionFragment"
-        android:label="@string/title_camera">
+        android:label="@string/title_permission">
 
         <action
             android:id="@+id/action_permission_to_camera"
             app:destination="@id/navigation_camera"
-            app:popUpTo="@id/navigation_permission"
-            app:popUpToInclusive="true" />
+            app:popUpTo="@id/navigation_home" />
 
     </fragment>
 
@@ -34,7 +33,14 @@
         android:id="@+id/navigation_camera"
         android:name="com.example.zigzag.ui.camera.CameraFragment"
         android:label="@string/title_camera"
-        tools:layout="@layout/fragment_camera" />
+        tools:layout="@layout/fragment_camera">
+
+        <action
+            android:id="@+id/action_camera_to_permission"
+            app:destination="@id/navigation_permission"
+            app:popUpTo="@id/navigation_home" />
+
+    </fragment>
 
 
     <fragment

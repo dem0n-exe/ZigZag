@@ -19,11 +19,10 @@ class PermissionFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         if (hasPermissions(requireContext())) {
             // If permissions have already been granted, proceed
             Navigation.findNavController(requireActivity(), R.id.nav_host_fragment)
-                .navigate(R.id.navigation_camera)
+                .navigate(R.id.action_permission_to_camera)
         } else {
             // Request camera-related permissions
             requestPermissions(PERMISSIONS_REQUIRED, PERMISSIONS_REQUEST_CODE)
@@ -38,7 +37,7 @@ class PermissionFragment : Fragment() {
             if (grantResults.all { it == PackageManager.PERMISSION_GRANTED }) {
                 // Takes the user to the success fragment when permission is granted
                 Navigation.findNavController(requireActivity(), R.id.nav_host_fragment)
-                    .navigate(R.id.navigation_camera)
+                    .navigate(R.id.action_permission_to_camera)
             } else {
                 Toast.makeText(context, "Permission request denied", Toast.LENGTH_LONG).show()
             }
