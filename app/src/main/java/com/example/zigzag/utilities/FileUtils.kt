@@ -1,8 +1,6 @@
 package com.example.zigzag.utilities
 
-import android.content.ContentValues
 import android.content.Context
-import android.provider.MediaStore
 import com.example.zigzag.R
 import java.io.File
 import java.text.SimpleDateFormat
@@ -19,11 +17,4 @@ object FileUtils {
     }
 
     private fun getDate() = SimpleDateFormat("yyyyMM_dd-HHmmss", Locale.US).format(Date())
-
-    fun addVideo(context: Context, filePath: String) {
-        val values = ContentValues(2)
-        values.put(MediaStore.Video.Media.MIME_TYPE, "video/mp4")
-        values.put("_data", filePath)
-        context.contentResolver.insert(MediaStore.Video.Media.EXTERNAL_CONTENT_URI, values)
-    }
 }
