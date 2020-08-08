@@ -256,9 +256,7 @@ class CameraFragment : Fragment() {
     }
 
     private fun stopCamera() {
-        if (this::gpuCameraRecorder.isInitialized && this::glSurfaceView.isInitialized
-            && gpuCameraRecorder.isStarted
-        ) {
+        if (this::gpuCameraRecorder.isInitialized && this::glSurfaceView.isInitialized) {
             recordProgress.visibility = View.GONE
             countDownTimer.cancel()
             recordProgress.progress = 15
